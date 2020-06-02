@@ -27,8 +27,10 @@ Depenencies:
 4. Run the installer.
 
 ### Install GCC:
-1. For Windows, open an elevated-PowerShell and run ```choco install mingw --version 8.1.0```.
-2. Ensure that it is installed correctly by running ```gcc``` and observing a fatal error.
+1. Visit the MinGW [download page](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/).
+2. Download the **MinGW-W64 Online Installer** and run the executable.
+3. On the `Settings` page, ensure Version 8.1.0, Architecture x86_64, Threads posix, Exception seh, and Build 0.
+4. Ensure that it is installed correctly by running ```gcc``` and observing a fatal error.
 
 ## Configure
 
