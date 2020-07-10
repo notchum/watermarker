@@ -1,8 +1,9 @@
 # watermarker
-This was developed for use on Windows 10, but can be used on any Linux distribution.
+This was developed for use on Windows 10 with MinGW, but can be used on any Linux distribution.
 
 Depenencies:
 - Qt5
+- OpenCV
 - CMake
 - GCC
 
@@ -15,6 +16,10 @@ Depenencies:
 4. Download and run the installer.
 5. On the `Qt Setup` page, expand the line with **Qt 5.15.0** and select **MinGW 8.1.0 64 bit**. The only other thing to be selected on this page is **Qt Creator** under **Tools** which is not optional.
 
+### Download and install OpenCV:
+1. Download pre-built OpenCV package from [OpenCV-MinGW-Build](https://github.com/huihut/OpenCV-MinGW-Build) and download the correct installer.
+2. Add `path/to/opencv/x64/mingw/bin` to the PATH
+
 ### Download and install the latest version of CMake:
 1. Visit the CMake [download page](https://cmake.org/download/).
 2. For Windows, download the binary distribution `Windows win64-x64 Installer`.
@@ -22,8 +27,10 @@ Depenencies:
 4. Run the installer.
 
 ### Install GCC:
-1. For Windows, open an elevated-PowerShell and run ```choco install mingw --version 8.1.0```.
-2. Ensure that it is installed correctly by running ```gcc``` and observing a fatal error.
+1. Visit the MinGW [download page](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/).
+2. Download the **MinGW-W64 Online Installer** and run the executable.
+3. On the `Settings` page, ensure Version 8.1.0, Architecture x86_64, Threads posix, Exception seh, and Build 0.
+4. Ensure that it is installed correctly by running ```gcc``` and observing a fatal error.
 
 ## Configure
 
