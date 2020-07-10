@@ -8,17 +8,14 @@
 
 #include <QApplication>
 
-#include "main_window.hpp"
+#include "window_watcher.hpp"
 
 int main(int argc, char **argv)
 {
 	QApplication::setStyle("plastique");
 	QApplication app(argc, argv);
 
-	MainWindow *main = new MainWindow();
-	main->setMinimumSize(850, 500);
-	main->showMaximized();
-	main->show();
+	WindowWatcher *main = new WindowWatcher(1);
 
 	app.exec();
 

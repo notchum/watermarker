@@ -15,6 +15,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#include <opencv2/opencv.hpp>
+
 /** 
  * @class   ImageViewer
  * 
@@ -31,7 +33,7 @@ public:
 	/** 
 	 * @brief Constructor 
 	 */
-	ImageViewer(QWidget *parent = nullptr) : QWidget(parent), it(n) {}
+	ImageViewer(QWidget *parent = nullptr);
 
 	/** 
 	 * @brief Destructor 
@@ -40,11 +42,11 @@ public:
 
 private:
 	/** 
-	 * @brief Callback for stream subscriber
+	 * @brief Sets the QLabel's Pixmap from an OpenCV image
 	 * 
-	 * @param msg the sensor_msg image recieved from the subscriber
+	 * @param img the CV array image
 	 */
-	void streamCallback(const sensor_msgs::ImageConstPtr& msg);
+	void setPixmap(cv::Mat img);
 
 	/** 
 	 * @brief  Helper function to resize an OpenCV Mat image

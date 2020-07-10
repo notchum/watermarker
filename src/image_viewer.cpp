@@ -10,7 +10,7 @@
 
 #include "image_viewer.hpp"
 
-ImageViewer::ImageViewer(QWidget *parent, QString topic) : QWidget(parent)
+ImageViewer::ImageViewer(QWidget *parent) : QWidget(parent)
 {
     // Create our image (using a QLabel)
     image_lbl = new QLabel;
@@ -21,13 +21,10 @@ ImageViewer::ImageViewer(QWidget *parent, QString topic) : QWidget(parent)
     setLayout(layout);
 }
 
-void ImageViewer::streamCallback(const sensor_msgs::ImageConstPtr& msg)
+void ImageViewer::setPixmap(cv::Mat img)
 {
-    // Create our cv image
-    cv::Mat img;
-
     // Convert the color encoding to the RGB for Qt
-    cv::cvtColor(img, img, CV_BGR2RGB);
+    cv::cvtColor(img, img, 4); // CV_BGR2RGB = 4
 
     // Resize the OpenCV image to fit the window but keep aspect ratio
     img = resizeImage(img);

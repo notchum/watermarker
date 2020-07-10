@@ -11,11 +11,12 @@
 #ifndef MAIN_WINDOW_HPP
 #define MAIN_WINDOW_HPP
 
+#include "first_window.hpp"
+#include "second_window.hpp"
+
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QLabel>
-#include <QGroupBox>
 
 /** 
  * @class   MainWindow
@@ -27,7 +28,7 @@
  * 			constructor is then called in main.cpp
  * 			to execute the entire application.
  */
-class MainWindow: public QWidget
+class MainWindow : public QWidget
 {
 	Q_OBJECT
 
@@ -42,13 +43,28 @@ public:
 	 */
 	virtual ~MainWindow() {}
 
+	// Enum used for keeping track of current window
+	enum class windows
+	{
+		FIRST_WINDOW,
+		SECOND_WINDOW,
+		MAIN_WINDOW
+	};
+
 public slots:
 	/** 
 	 * @brief Qt slot for disabling (changing to red) a QFrame
      * 
      * @param frame pointer to the QFrame to be altered
 	 */
-	void disableIndLight(QFrame *frame);
+	//void disableIndLight(QFrame *frame);
+
+	void advanceWindow();
+
+private:
+	windows current_window;
+	FirstWindow first_window;
+	SecondWindow second_window;
 
 }; // end class MainWindow
 
