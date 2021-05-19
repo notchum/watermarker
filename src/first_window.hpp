@@ -50,6 +50,16 @@ public:
 	 */
 	QString getPath();
 
+	/** 
+	 * @brief Check if path exists and if yes: Is it a file and no directory?
+	 */
+	bool isPathFile();
+
+	/** 
+	 * @brief Check if path exists and if yes: Is it a directory?
+	 */
+	bool isPathDir();
+
 	// Enum used for keeping track of current radio button
 	enum class radio_buttons
 	{

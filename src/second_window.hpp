@@ -18,6 +18,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QDebug>
+#include <QFileDialog>
 
 /** 
  * @class   SecondWindow
@@ -29,55 +30,55 @@
  */
 class SecondWindow : public QWidget
 {
-	Q_OBJECT
+   Q_OBJECT
 
 public:
-	/** 
-	 * @brief Constructor 
-	 */
-	SecondWindow(QWidget * parent = nullptr);
+   /** 
+    * @brief Constructor 
+    */
+   SecondWindow(QWidget * parent = nullptr);
 
-	/** 
-	 * @brief Destructor 
-	 */
-	virtual ~SecondWindow() {}
+   /** 
+    * @brief Destructor 
+    */
+   virtual ~SecondWindow() {}
 
-	/** 
-	 * @brief Getter for input path 
-	 */
-	QString getPath();
+   /** 
+    * @brief Getter for input path 
+    */
+   QString getPath();
 
 signals:
-	/** 
-	 * @brief Qt signal for when the okay button is pressed
-	 */
-	void okayButtonPressed();
+   /** 
+    * @brief Qt signal for when the okay button is pressed
+    */
+   void okayButtonPressed();
 
 public slots:
-	/** 
-	 * @brief Qt slot for when the okay button is pressed
-	 */
-	void okayButtonPressed_slot();
+   /** 
+    * @brief Qt slot for when the okay button is pressed
+    */
+   void okayButtonPressed_slot();
 
-	/** 
-	 * @brief Qt slot for when the exit button is pressed
-	 */
-	void exitButtonPressed_slot();
+   /** 
+    * @brief Qt slot for when the exit button is pressed
+    */
+   void exitButtonPressed_slot();
 
-	/** 
-	 * @brief Qt slot for when the browse path button is pressed
-	 */
-	void selectPath_slot();
+   /** 
+    * @brief Qt slot for when the browse path button is pressed
+    */
+   void selectPath_slot();
 
 private:
-    /* Required advance or exit buttons */
-    QPushButton *okayButton;
-    QPushButton *exitButton;
+   /* Required advance or exit buttons */
+   QPushButton *okayButton;
+   QPushButton *exitButton;
 
-	/* The file browser widgets */
-	QPushButton *wmButton;
-    QLineEdit *wmLineEdit;
-	QString path;
+   /* The file browser widgets */
+   QPushButton *wmButton;
+   QLineEdit *wmLineEdit;
+   QString path;
 
 }; // end class SecondWindow
 

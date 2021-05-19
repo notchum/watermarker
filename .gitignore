@@ -37,3 +37,6 @@ install/
 
 # VSCode dotfiles
 .vscode/
+
+# Log files
+*.log

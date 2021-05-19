@@ -17,6 +17,7 @@
 
 #include <QWidget>
 #include <QDebug>
+#include <QScreen>
 
 /** 
  * @class   WindowWatcher
@@ -33,42 +34,46 @@ class WindowWatcher : public QWidget
 	Q_OBJECT
 
 public:
-	/** 
-	 * @brief Constructor 
-	 */
-	WindowWatcher(QWidget * parent = nullptr) : QWidget(parent) {}
+   /** 
+    * @brief Constructor 
+    */
+   WindowWatcher(QWidget * parent = nullptr) : QWidget(parent) {}
 
-    /** 
-	 * @brief Parameterized constructor 
-     * 
-     * @param window_number corresponds to the enum "windows" to choose a starting window
-	 */
-	WindowWatcher(uint8_t winow_number, QWidget * parent = nullptr);
+   /** 
+    * @brief Parameterized constructor 
+    * 
+    * @param window_number corresponds to the enum "windows" to choose a starting window
+    * 
+    * @param size the primary screen size
+    */
+   WindowWatcher(uint8_t window_number, QSize size, QWidget * parent = nullptr);
 
-	/** 
-	 * @brief Destructor 
-	 */
-	virtual ~WindowWatcher() {}
+   /** 
+    * @brief Destructor 
+    */
+   virtual ~WindowWatcher() {}
 
-	/* Enum used for keeping track of current window */
-	enum class windows
-	{
-		FIRST_WINDOW,
-		SECOND_WINDOW,
-		MAIN_WINDOW
-	};
+   /* Enum used for keeping track of current window */
+   enum class windows
+   {
+   FIRST_WINDOW,
+   SECOND_WINDOW,
+   MAIN_WINDOW
+   };
 
 public slots:
-	/** 
-	 * @brief Qt slot to change windows
-	 */
-	void advanceWindow();
+   /** 
+    * @brief Qt slot to change windows
+    */
+   void advanceWindow();
 
 private:
-	windows currentWindow;
-    MainWindow *mainWindow;
-	FirstWindow *firstWindow;
-	SecondWindow *secondWindow;
+   windows currentWindow;
+   MainWindow *mainWindow;
+   FirstWindow *firstWindow;
+   SecondWindow *secondWindow;
+
+   QSize windowSize;
 
 }; // end class WindowWatcher
 

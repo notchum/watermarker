@@ -5,18 +5,28 @@
  * 
  * @author Morgan Chumbley
  * 
- * @date   May 29th, 2020
+ * @date   July 11th, 2020
  */
 
 #ifndef MAIN_WINDOW_HPP
 #define MAIN_WINDOW_HPP
 
-#include "first_window.hpp"
-#include "second_window.hpp"
+#include "image_viewer.hpp"
+#include "wm_widget.hpp"
+
+#include <vector>
 
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QDebug>
+#include <QCheckBox>
+#include <QProgressBar>
+#include <QGroupBox>
+#include <QSlider>
+#include <QSpinBox>
 
 /** 
  * @class   MainWindow
@@ -30,41 +40,90 @@
  */
 class MainWindow : public QWidget
 {
-	Q_OBJECT
+   Q_OBJECT
 
 public:
-	/** 
-	 * @brief Constructor 
-	 */
-	MainWindow(QWidget * parent = nullptr);
+   /** 
+    * @brief Constructor 
+    */
+   MainWindow(QWidget * parent = nullptr) : QWidget(parent) {}
 
-	/** 
-	 * @brief Destructor 
-	 */
-	virtual ~MainWindow() {}
+   /** 
+    * @brief Parameterized constructor 
+    * 
+    * @param windowSize the primary screen size
+    */
+   MainWindow(QSize windowSize, QWidget * parent = nullptr);
 
-	// Enum used for keeping track of current window
-	enum class windows
-	{
-		FIRST_WINDOW,
-		SECOND_WINDOW,
-		MAIN_WINDOW
-	};
+   /** 
+    * @brief Destructor 
+    */
+   virtual ~MainWindow() {}
+
+   /** 
+    * @brief Initialization function for when the main window is entered into
+    */
+   void init(QString path, QString wmPath, bool isPathDir);
 
 public slots:
-	/** 
-	 * @brief Qt slot for disabling (changing to red) a QFrame
-     * 
-     * @param frame pointer to the QFrame to be altered
-	 */
-	//void disableIndLight(QFrame *frame);
+   /** 
+    * @brief Qt slot for when the okay button is pressed
+    */
+   void okayButtonPressed_slot();
 
-	void advanceWindow();
+   /** 
+    * @brief Qt slot for when the exit button is pressed
+    */
+   void exitButtonPressed_slot();
+
+   /** 
+    * @brief Qt slot for when the exit button is pressed
+    */
+   void checkBox_slot(int state);
+
+   void tranValueChanged(int8_t ident, int value);
+   void sizeValueChanged(int8_t ident, int value);
+
+protected:
+   void resizeEvent(QResizeEvent *event);
 
 private:
-	windows current_window;
-	FirstWindow first_window;
-	SecondWindow second_window;
+   /** 
+    * @brief Setter for paths
+    * 
+    * @param path main path
+    * 
+    * @param wmPath watermark path
+    */
+   void setPaths(QString path, QString wmPath);
+
+   /* Required advance or exit buttons */
+   QPushButton *okayButton;
+   QPushButton *exitButton;
+
+   /* Useful command widgets */
+   QCheckBox *invertCB;
+   QSlider *tranSlider;
+   QSlider *sizeSlider;
+   QSpinBox *tranSpinBox;
+   QSpinBox *sizeSpinBox;
+   QProgressBar *progressBar;
+
+   /* Images */
+   cv::Mat wmImg;
+   cv::Mat wmImg_n;
+   std::vector<cv::String> filenames;
+   ImageViewer *imgViewer;
+
+   /* Paths */
+   QString _mnPath;
+   QString _wmPath;
+
+   /* Other */
+   int windowWidth;
+   int windowHeight;
+   int wmTran;
+   int wmSize;
 
 }; // end class MainWindow
 
