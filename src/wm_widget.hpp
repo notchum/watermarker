@@ -51,7 +51,7 @@ public:
 
    void setScale( int scale );
 
-   // enum class start_positions 
+   // enum class StartPosition
    // {
    // 	topleft, 
    // 	left, 
@@ -125,7 +125,7 @@ private:
 
    /* Other */
    QPoint oldPos;
-   //start_positions startPos;
+   //StartPosition startPos;
    int scale;
 
 }; // end class WatermarkWidget

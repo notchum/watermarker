@@ -50,11 +50,11 @@ FirstWindow::FirstWindow( QWidget *parent ) : QWidget(parent)
 
    // when the batch radio button is selected
    QObject::connect(batcRadio, &QRadioButton::clicked, 
-                     [=]() { radioButton_slot(radio_buttons::BATC_RADIO); });
+                     [=]() { radioButton_slot(RadioButton::BATC_RADIO); });
 
    // when the individual radio button is selected
    QObject::connect(indvRadio, &QRadioButton::clicked, 
-                     [=]() { radioButton_slot(radio_buttons::IDNV_RADIO); });
+                     [=]() { radioButton_slot(RadioButton::IDNV_RADIO); });
 
    // when the browse path button pressed
    QObject::connect(pathButton, &QPushButton::clicked, 
@@ -84,15 +84,15 @@ bool FirstWindow::isPathDir( void )
    return QFileInfo::exists(path) && QFileInfo(path).isDir();
 } // end FirstWindow::isPathDir()
 
-void FirstWindow::radioButton_slot( radio_buttons index )
+void FirstWindow::radioButton_slot( RadioButton index )
 {
    bool isPathFile = this->isPathFile();
    bool isPathDir = this->isPathDir();
 
    switch(index) {
-      case radio_buttons::BATC_RADIO:
+      case RadioButton::BATC_RADIO:
          LOG::INFO("Batch option selected");
-         currentOption = radio_buttons::BATC_RADIO;
+         currentOption = RadioButton::BATC_RADIO;
          if(isPathDir) {
                okayButton->setEnabled(true);
          }
@@ -100,9 +100,9 @@ void FirstWindow::radioButton_slot( radio_buttons index )
                okayButton->setDisabled(true);
          }
          break;
-      case radio_buttons::IDNV_RADIO:
+      case RadioButton::IDNV_RADIO:
          LOG::INFO("Individual option selected");
-         currentOption = radio_buttons::IDNV_RADIO;
+         currentOption = RadioButton::IDNV_RADIO;
          if(isPathFile) {
                okayButton->setEnabled(true);
          }
@@ -117,12 +117,12 @@ void FirstWindow::radioButton_slot( radio_buttons index )
 
 void FirstWindow::selectPath_slot( void )
 {
-   if(currentOption == radio_buttons::BATC_RADIO) {
+   if(currentOption == RadioButton::BATC_RADIO) {
       path = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                 QDir::homePath(),
                                                 QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
    }
-   else if(currentOption == radio_buttons::IDNV_RADIO) {
+   else if(currentOption == RadioButton::IDNV_RADIO) {
       path = QFileDialog::getOpenFileName(this, tr("Open Photo"),
                                                 QDir::homePath(),
                                                 tr("Images (*.png *.jpeg *.jpg);; All files (*.*)"));

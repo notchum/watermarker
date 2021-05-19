@@ -20,17 +20,17 @@ WindowWatcher::WindowWatcher( uint8_t window_number, QSize size, QWidget *parent
 
    switch(window_number) {
       case 1:
-         currentWindow = windows::FIRST_WINDOW;
+         currentWindow = Window::FIRST_WINDOW;
          firstWindow->show();
          break;
 
       case 2:
-         currentWindow = windows::SECOND_WINDOW;
+         currentWindow = Window::SECOND_WINDOW;
          secondWindow->show();
          break;
 
       case 3:
-         currentWindow = windows::MAIN_WINDOW;
+         currentWindow = Window::MAIN_WINDOW;
          mainWindow->setMinimumSize(1280, 720);
          mainWindow->showMaximized();
          mainWindow->show();
@@ -53,24 +53,24 @@ WindowWatcher::WindowWatcher( uint8_t window_number, QSize size, QWidget *parent
 void WindowWatcher::advanceWindow( void )
 {
    switch(currentWindow) {
-      case windows::FIRST_WINDOW:
+      case Window::FIRST_WINDOW:
          mainWindow->hide();
          firstWindow->hide();
          secondWindow->show();
-         currentWindow = windows::SECOND_WINDOW;
+         currentWindow = Window::SECOND_WINDOW;
          break;
 
-      case windows::SECOND_WINDOW:
+      case Window::SECOND_WINDOW:
          firstWindow->hide();
          secondWindow->hide();
          mainWindow->init(firstWindow->getPath(), secondWindow->getPath(), firstWindow->isPathDir());
          mainWindow->setMinimumSize(1280, 720);
          mainWindow->showMaximized();
          mainWindow->show();
-         currentWindow = windows::MAIN_WINDOW;
+         currentWindow = Window::MAIN_WINDOW;
          break;
 
-      case windows::MAIN_WINDOW:
+      case Window::MAIN_WINDOW:
          break;
 
       default:

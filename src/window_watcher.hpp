@@ -42,7 +42,7 @@ public:
    /** 
     * @brief Parameterized constructor 
     * 
-    * @param window_number corresponds to the enum "windows" to choose a starting window
+    * @param window_number corresponds to the enum "Window" to choose a starting window
     * 
     * @param size the primary screen size
     */
@@ -54,11 +54,11 @@ public:
    virtual ~WindowWatcher( void ) {}
 
    /* Enum used for keeping track of current window */
-   enum class windows
+   enum class Window
    {
-   FIRST_WINDOW,
-   SECOND_WINDOW,
-   MAIN_WINDOW
+      FIRST_WINDOW,
+      SECOND_WINDOW,
+      MAIN_WINDOW
    };
 
 public slots:
@@ -68,7 +68,7 @@ public slots:
    void advanceWindow( void );
 
 private:
-   windows currentWindow;
+   Window currentWindow;
    MainWindow *mainWindow;
    FirstWindow *firstWindow;
    SecondWindow *secondWindow;
