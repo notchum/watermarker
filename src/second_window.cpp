@@ -9,8 +9,9 @@
  */
 
 #include "second_window.hpp"
+#include "lib/logger/logger.hpp"
 
-SecondWindow::SecondWindow(QWidget *parent) : QWidget(parent)
+SecondWindow::SecondWindow( QWidget *parent ) : QWidget(parent)
 {
    wmLineEdit = new QLineEdit();
    wmButton = new QPushButton(tr("Browse"));
@@ -47,37 +48,37 @@ SecondWindow::SecondWindow(QWidget *parent) : QWidget(parent)
    // when the exit button pressed
    QObject::connect(exitButton, &QPushButton::clicked, 
                   [=]() { exitButtonPressed_slot(); });
-}
+} // end SecondWindow::SecondWindow()
 
-QString SecondWindow::getPath()
+QString SecondWindow::getPath( void )
 {
    return path;
-}
+} // end SecondWindow::getPath()
 
-void SecondWindow::selectPath_slot()
+void SecondWindow::selectPath_slot( void )
 {
    path = QFileDialog::getOpenFileName(this, tr("Open Photo"),
                                        QDir::homePath(),
                                        tr("Images (*.png *.jpeg *.jpg);; All files (*.*)"));
    if(QFileInfo::exists(path)) {
-      qInfo() << "Selected " << path;
+      LOG::INFO(("Selected " + path.toStdString()).c_str());
       wmLineEdit->setText(path);
       okayButton->setEnabled(true);
    }
    else {
-      qInfo() << "Path does not exist";
+      LOG::INFO("Path does not exist");
       okayButton->setDisabled(true);
    }
-}
+} // end SecondWindow::selectPath_slot()
 
-void SecondWindow::okayButtonPressed_slot()
+void SecondWindow::okayButtonPressed_slot( void )
 {
    emit okayButtonPressed();
-   qInfo() << "SecondWindow okayButtonPressed emitted";
-}
+   LOG::DEBUG("SecondWindow okayButtonPressed emitted");
+} // end SecondWindow::okayButtonPressed_slot()
 
-void SecondWindow::exitButtonPressed_slot()
+void SecondWindow::exitButtonPressed_slot( void )
 {
-   qInfo() << "Done. Exiting...";
+   LOG::INFO("Done. Exiting...");
    this->close();
-}
+} // end SecondWindow::exitButtonPressed_slot()

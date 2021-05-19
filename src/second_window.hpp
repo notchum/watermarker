@@ -36,39 +36,39 @@ public:
    /** 
     * @brief Constructor 
     */
-   SecondWindow(QWidget * parent = nullptr);
+   SecondWindow( QWidget * parent = nullptr );
 
    /** 
     * @brief Destructor 
     */
-   virtual ~SecondWindow() {}
+   virtual ~SecondWindow( void ) {}
 
    /** 
     * @brief Getter for input path 
     */
-   QString getPath();
+   QString getPath( void );
 
 signals:
    /** 
     * @brief Qt signal for when the okay button is pressed
     */
-   void okayButtonPressed();
+   void okayButtonPressed( void );
 
 public slots:
    /** 
     * @brief Qt slot for when the okay button is pressed
     */
-   void okayButtonPressed_slot();
+   void okayButtonPressed_slot( void );
 
    /** 
     * @brief Qt slot for when the exit button is pressed
     */
-   void exitButtonPressed_slot();
+   void exitButtonPressed_slot( void );
 
    /** 
     * @brief Qt slot for when the browse path button is pressed
     */
-   void selectPath_slot();
+   void selectPath_slot( void );
 
 private:
    /* Required advance or exit buttons */

@@ -11,7 +11,7 @@
 #include "first_window.hpp"
 #include "lib/logger/logger.hpp"
 
-FirstWindow::FirstWindow(QWidget *parent) : QWidget(parent)
+FirstWindow::FirstWindow( QWidget *parent ) : QWidget(parent)
 {
    batcRadio = new QRadioButton(tr("Batch"));
    indvRadio = new QRadioButton(tr("Individual"));
@@ -67,24 +67,24 @@ FirstWindow::FirstWindow(QWidget *parent) : QWidget(parent)
    // when the exit button pressed
    QObject::connect(exitButton, &QPushButton::clicked, 
                      [=]() { exitButtonPressed_slot(); });
-}
+} // end FirstWindow::FirstWindow()
 
-QString FirstWindow::getPath()
+QString FirstWindow::getPath( void )
 {
    return path;
-}
+} // end FirstWindow::getPath()
 
-bool FirstWindow::isPathFile()
+bool FirstWindow::isPathFile( void )
 {
    return QFileInfo::exists(path) && QFileInfo(path).isFile();
-}
+} // end FirstWindow::isPathFile()
 
-bool FirstWindow::isPathDir()
+bool FirstWindow::isPathDir( void )
 {
    return QFileInfo::exists(path) && QFileInfo(path).isDir();
-}
+} // end FirstWindow::isPathDir()
 
-void FirstWindow::radioButton_slot(radio_buttons index)
+void FirstWindow::radioButton_slot( radio_buttons index )
 {
    bool isPathFile = this->isPathFile();
    bool isPathDir = this->isPathDir();
@@ -113,9 +113,9 @@ void FirstWindow::radioButton_slot(radio_buttons index)
       default:
          break;
    }
-}
+} // end FirstWindow::radioButton_slot()
 
-void FirstWindow::selectPath_slot()
+void FirstWindow::selectPath_slot( void )
 {
    if(currentOption == radio_buttons::BATC_RADIO) {
       path = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
@@ -137,16 +137,16 @@ void FirstWindow::selectPath_slot()
       LOG::INFO("Path does not exist");
       okayButton->setDisabled(true);
    }
-}
+} // end FirstWindow::selectPath_slot()
 
-void FirstWindow::okayButtonPressed_slot()
+void FirstWindow::okayButtonPressed_slot( void )
 {
    emit okayButtonPressed();
    LOG::DEBUG("FirstWindow okayButtonPressed emitted");
-}
+} // end FirstWindow::okayButtonPressed_slot()
 
-void FirstWindow::exitButtonPressed_slot()
+void FirstWindow::exitButtonPressed_slot( void )
 {
    LOG::INFO("Done. Exiting...");
    this->close();
-}
+} // end FirstWindow::exitButtonPressed_slot()

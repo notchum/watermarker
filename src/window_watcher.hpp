@@ -37,7 +37,7 @@ public:
    /** 
     * @brief Constructor 
     */
-   WindowWatcher(QWidget * parent = nullptr) : QWidget(parent) {}
+   WindowWatcher( QWidget * parent = nullptr ) : QWidget(parent) {}
 
    /** 
     * @brief Parameterized constructor 
@@ -46,12 +46,12 @@ public:
     * 
     * @param size the primary screen size
     */
-   WindowWatcher(uint8_t window_number, QSize size, QWidget * parent = nullptr);
+   WindowWatcher( uint8_t window_number, QSize size, QWidget * parent = nullptr );
 
    /** 
     * @brief Destructor 
     */
-   virtual ~WindowWatcher() {}
+   virtual ~WindowWatcher( void ) {}
 
    /* Enum used for keeping track of current window */
    enum class windows
@@ -65,7 +65,7 @@ public slots:
    /** 
     * @brief Qt slot to change windows
     */
-   void advanceWindow();
+   void advanceWindow( void );
 
 private:
    windows currentWindow;

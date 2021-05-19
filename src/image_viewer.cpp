@@ -10,7 +10,7 @@
 
 #include "image_viewer.hpp"
 
-ImageViewer::ImageViewer(QWidget *parent) : QWidget(parent)
+ImageViewer::ImageViewer( QWidget *parent ) : QWidget(parent)
 {
    // Create the label
    image_lbl = new QLabel();
@@ -25,9 +25,9 @@ ImageViewer::ImageViewer(QWidget *parent) : QWidget(parent)
    QVBoxLayout *mainLayout = new QVBoxLayout();
    mainLayout->addWidget(image_lbl);
    setLayout(mainLayout);
-}
+} // end ImageViewer::ImageViewer()
 
-void ImageViewer::init(cv::String imgPath, cv::String wmPath)
+void ImageViewer::init( cv::String imgPath, cv::String wmPath )
 {
    // Set the image matrix
    this->image = cv::imread(imgPath);
@@ -39,37 +39,37 @@ void ImageViewer::init(cv::String imgPath, cv::String wmPath)
 
    // Initialize the watermark
    wmw->init(wmPath);
-}
+} // end ImageViewer::init()
 
-void ImageViewer::loadWM(cv::String filename)
+void ImageViewer::loadWM( cv::String filename )
 {
    // Set the wm image matrix
    //wmImg = cv::imread(filename);
 
 
-}
+} // end ImageViewer::loadWM()
 
-void ImageViewer::changeWMScale(int scale)
+void ImageViewer::changeWMScale( int scale )
 {
    wmw->setScale(scale);
 }
 
-void ImageViewer::resizeEvent(QResizeEvent *event)
+void ImageViewer::resizeEvent( QResizeEvent *event )
 {
    this->setPixmap();
    QWidget::resizeEvent(event);
-}
+} // end ImageViewer::changeWMScale()
 
-void ImageViewer::setPixmap()
+void ImageViewer::setPixmap( void )
 {
    // Resize the OpenCV image to fit the window but keep aspect ratio
    cv::Mat img = this->resizeImage(image, this->width() - 30); // Resized to size of 
 
    // Set the pixmap for the QLabel which displays the image recieved
    image_lbl->setPixmap(QPixmap::fromImage(QImage(img.data, img.cols, img.rows, img.step, QImage::Format_RGB888)));
-}
+} // end ImageViewer::setPixmap()
 
-cv::Mat ImageViewer::resizeImage(const cv::Mat& img, int target_width)
+cv::Mat ImageViewer::resizeImage( const cv::Mat& img, int target_width )
 {
    int width = img.cols, height = img.rows;
 
@@ -101,4 +101,4 @@ cv::Mat ImageViewer::resizeImage(const cv::Mat& img, int target_width)
 
    // Return the newly resized image
    return out_img;
-}
+} // end ImageViewer::resizeImage()

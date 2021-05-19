@@ -46,14 +46,14 @@ public:
    /** 
     * @brief Constructor 
     */
-   MainWindow(QWidget * parent = nullptr) : QWidget(parent) {}
+   MainWindow( QWidget * parent = nullptr ) : QWidget(parent) {}
 
    /** 
     * @brief Parameterized constructor 
     * 
     * @param windowSize the primary screen size
     */
-   MainWindow(QSize windowSize, QWidget * parent = nullptr);
+   MainWindow( QSize windowSize, QWidget * parent = nullptr );
 
    /** 
     * @brief Destructor 
@@ -63,29 +63,29 @@ public:
    /** 
     * @brief Initialization function for when the main window is entered into
     */
-   void init(QString path, QString wmPath, bool isPathDir);
+   void init( QString path, QString wmPath, bool isPathDir );
 
 public slots:
    /** 
     * @brief Qt slot for when the okay button is pressed
     */
-   void okayButtonPressed_slot();
+   void okayButtonPressed_slot( void );
 
    /** 
     * @brief Qt slot for when the exit button is pressed
     */
-   void exitButtonPressed_slot();
+   void exitButtonPressed_slot( void );
 
    /** 
     * @brief Qt slot for when the exit button is pressed
     */
-   void checkBox_slot(int state);
+   void checkBox_slot( int state );
 
-   void tranValueChanged(int8_t ident, int value);
-   void sizeValueChanged(int8_t ident, int value);
+   void tranValueChanged( int8_t ident, int value );
+   void sizeValueChanged( int8_t ident, int value );
 
 protected:
-   void resizeEvent(QResizeEvent *event);
+   void resizeEvent( QResizeEvent *event );
 
 private:
    /** 
@@ -95,7 +95,7 @@ private:
     * 
     * @param wmPath watermark path
     */
-   void setPaths(QString path, QString wmPath);
+   void setPaths( QString path, QString wmPath );
 
    /* Required advance or exit buttons */
    QPushButton *okayButton;

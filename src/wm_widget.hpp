@@ -35,21 +35,21 @@ public:
    /** 
     * @brief Constructor 
     */
-   WatermarkWidget(QWidget * parent = nullptr);
+   WatermarkWidget( QWidget * parent = nullptr );
 
    /** 
     * @brief Destructor 
     */
-   virtual ~WatermarkWidget() {}
+   virtual ~WatermarkWidget( void ) {}
 
    /** 
     * @brief Initialization function
     * 
     * @param filename Location of watermark image
     */
-   void init(cv::String filename);
+   void init( cv::String filename );
 
-   void setScale(int scale);
+   void setScale( int scale );
 
    // enum class start_positions 
    // {
@@ -65,19 +65,19 @@ public:
    // };
 
 protected:
-   void mousePressEvent(QMouseEvent *event)
+   void mousePressEvent( QMouseEvent *event )
    {
       oldPos = event->globalPos();
-   }
+   } // end mousePressEvent()
 
-   void mouseMoveEvent(QMouseEvent *event)
+   void mouseMoveEvent( QMouseEvent *event )
    {
       const QPoint delta = event->globalPos() - oldPos;
       move(x()+delta.x(), y()+delta.y());
       oldPos = event->globalPos();
 
       // if (this->underMouse()) {
-      // 	qInfo() << "Under mouse";
+      // 	LOG::INFO("Under mouse");
       // 	// No drag, just change the cursor and return
       // 	if (event->x() <= 3 && event->y() <= 3) {
       // 	startPos = start_positions::topleft;
@@ -109,12 +109,12 @@ protected:
       // 	}
       // 	return;
       // }
-   }
+   } // end mouseMoveEvent()
 
 private:
-   void setPixmap();
-   cv::Mat resize();
-   cv::Mat drawBox(cv::Mat img);
+   void setPixmap( void );
+   cv::Mat resize( void );
+   cv::Mat drawBox( cv::Mat img );
 
    /* A QLabel can be used to diplay an image */
    QLabel *image_lbl;

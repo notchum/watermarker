@@ -17,7 +17,7 @@
 #include "window_watcher.hpp"
 #include "lib/logger/logger.hpp"
 
-int main(int argc, char **argv)
+int main( int argc, char **argv )
 {
    // Set the path to log to
    std::string file_path = __FILE__ ;
@@ -25,15 +25,19 @@ int main(int argc, char **argv)
    std::string top_path = src_path.substr(0, src_path.rfind(PATH_DELIM)) ;
    LOG::set_file_name( (top_path + PATH_DELIM + "watermarker.log").c_str() ) ;
 
+   // Create the Qt app 
    QApplication::setStyle("plastique");
    QApplication app(argc, argv);
 
+   // Grab the monitor size
    QSize size = app.screens()[0]->size();
 
+   // Create the window widget
    WindowWatcher *main = new WindowWatcher(1, size);
 
+   // Execute the application
    app.exec();
 
    // After the app is closed, shutdown
    delete main;
-}
+} // end main()

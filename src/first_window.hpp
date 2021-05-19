@@ -38,27 +38,27 @@ public:
 	/** 
 	 * @brief Constructor 
 	 */
-	FirstWindow(QWidget * parent = nullptr);
+	FirstWindow( QWidget * parent = nullptr );
 
 	/** 
 	 * @brief Destructor 
 	 */
-	virtual ~FirstWindow() {}
+	virtual ~FirstWindow( void ) {}
 
 	/** 
 	 * @brief Getter for input path 
 	 */
-	QString getPath();
+	QString getPath( void );
 
 	/** 
 	 * @brief Check if path exists and if yes: Is it a file and no directory?
 	 */
-	bool isPathFile();
+	bool isPathFile( void );
 
 	/** 
 	 * @brief Check if path exists and if yes: Is it a directory?
 	 */
-	bool isPathDir();
+	bool isPathDir( void );
 
 	// Enum used for keeping track of current radio button
 	enum class radio_buttons
@@ -71,30 +71,30 @@ signals:
 	/** 
 	 * @brief Qt signal for when the okay button is pressed
 	 */
-	void okayButtonPressed();
+	void okayButtonPressed( void );
 
 public slots:
 	/** 
 	 * @brief Qt slot for when the okay button is pressed
 	 */
-	void okayButtonPressed_slot();
+	void okayButtonPressed_slot( void );
 
 	/** 
 	 * @brief Qt slot for when the exit button is pressed
 	 */
-	void exitButtonPressed_slot();
+	void exitButtonPressed_slot( void );
 
 	/** 
 	 * @brief Qt slot for when the exit button is pressed
 	 * 
 	 * @param index the index of the radio button selected
 	 */
-	void radioButton_slot(radio_buttons index);
+	void radioButton_slot( radio_buttons index );
 
 	/** 
 	 * @brief Qt slot for when the browse path button is pressed
 	 */
-	void selectPath_slot();
+	void selectPath_slot( void );
 
 private:
     /* Required advance or exit buttons */

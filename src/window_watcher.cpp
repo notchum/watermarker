@@ -9,8 +9,9 @@
  */
 
 #include "window_watcher.hpp"
+#include "lib/logger/logger.hpp"
 
-WindowWatcher::WindowWatcher(uint8_t window_number, QSize size, QWidget *parent) : QWidget(parent), windowSize(size)
+WindowWatcher::WindowWatcher( uint8_t window_number, QSize size, QWidget *parent ) : QWidget(parent), windowSize(size)
 {
    // Create each window
    mainWindow = new MainWindow(windowSize);
@@ -36,7 +37,7 @@ WindowWatcher::WindowWatcher(uint8_t window_number, QSize size, QWidget *parent)
          break;
          
       default:
-         qCritical() << "Invalid starting window!";
+         LOG::FATAL("Invalid starting window!");
          break;
    }  
 
@@ -47,9 +48,9 @@ WindowWatcher::WindowWatcher(uint8_t window_number, QSize size, QWidget *parent)
    // Hide the second window when the OK button pressed
    QObject::connect(secondWindow, &SecondWindow::okayButtonPressed, 
                   [=]() { advanceWindow(); });
-}
+} // end WindowWatcher::WindowWatcher()
 
-void WindowWatcher::advanceWindow()
+void WindowWatcher::advanceWindow( void )
 {
    switch(currentWindow) {
       case windows::FIRST_WINDOW:
@@ -75,4 +76,4 @@ void WindowWatcher::advanceWindow()
       default:
          break;
    }
-}
+} // end WindowWatcher::advanceWindow()

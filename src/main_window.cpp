@@ -9,8 +9,9 @@
  */
 
 #include "main_window.hpp"
+#include "lib/logger/logger.hpp"
 
-MainWindow::MainWindow(QSize windowSize, QWidget *parent) : QWidget(parent), windowHeight(windowSize.height()), windowWidth(windowSize.width())
+MainWindow::MainWindow( QSize windowSize, QWidget *parent ) : QWidget(parent), windowHeight(windowSize.height()), windowWidth(windowSize.width())
 {
    /************************************************************************************************
     *
@@ -118,9 +119,9 @@ MainWindow::MainWindow(QSize windowSize, QWidget *parent) : QWidget(parent), win
    // when the exit button pressed
    QObject::connect(exitButton, &QPushButton::clicked, 
                      [=]() { exitButtonPressed_slot(); });
-}
+} // end MainWindow::MainWindow()
 
-void MainWindow::init(QString path, QString wmPath, bool isPathDir)
+void MainWindow::init( QString path, QString wmPath, bool isPathDir )
 {
    // First, set the paths
    this->setPaths(path, wmPath);
@@ -143,85 +144,92 @@ void MainWindow::init(QString path, QString wmPath, bool isPathDir)
    else { // For directories with many images
       this->okayButtonPressed_slot();
    }
-}
+} // end MainWindow::init()
 
-void MainWindow::resizeEvent(QResizeEvent *event)
+void MainWindow::resizeEvent( QResizeEvent *event )
 {
    windowWidth = this->width();
    windowHeight = this->height();
    imgViewer->setFixedWidth(windowWidth / 2);
    QWidget::resizeEvent(event);
-}
+} // end MainWindow::resizeEvent()
 
-void MainWindow::setPaths(QString path, QString wmPath) 
+void MainWindow::setPaths( QString path, QString wmPath ) 
 {
    _mnPath = path;
    _wmPath = wmPath;
-}
+} // end MainWindow::setPaths()
 
 void MainWindow::okayButtonPressed_slot()
 {
    static int i = 0;
    if(i < filenames.size()) {
-      qInfo() << "Advance to " << QString::fromStdString(filenames[i]);
+      LOG::DEBUG(("Advance to " + filenames[i]).c_str());
       imgViewer->init(filenames[i], _wmPath.toStdString());
       i++;
    }
    else {
       this->exitButtonPressed_slot();
    }
-}
+} // end MainWindow::okayButtonPressed_slot()
 
-void MainWindow::exitButtonPressed_slot()
+void MainWindow::exitButtonPressed_slot( void )
 {
-   qInfo() << "Done. Exiting...";
+   LOG::INFO("Done. Exiting...");
    this->close();
-}
+} // end MainWindow::exitButtonPressed_slot()
 
-void MainWindow::checkBox_slot(int state) 
+void MainWindow::checkBox_slot( int state ) 
 {
    switch(state) {
       case 0:
-         qInfo() << "Inverted watermark: OFF";
+         LOG::INFO("Inverted watermark: OFF");
          break;
+
       case 1: 
-         qInfo() << "tristate 1";
+         LOG::INFO("tristate 1");
          break;
+
       case 2:
-         qInfo() << "Inverted watermark: ON";
+         LOG::INFO("Inverted watermark: ON");
          break;
+
       default:
          break;
    }
-}
+} // end MainWindow::checkBox_slot()
 
-void MainWindow::tranValueChanged(int8_t ident, int value)
+void MainWindow::tranValueChanged( int8_t ident, int value )
 {
    switch(ident){
       case 0: // Case where the spin box triggers the slider to change
          tranSlider->setValue(value);
          break;
+
       case 1: // Case where the slider triggers the spin box to change
          tranSpinBox->setValue(value);
          break;
+
       default:
          break;
    }
    wmTran = value;
-}
+} // end MainWindow::tranValueChanged()
 
-void MainWindow::sizeValueChanged(int8_t ident, int value)
+void MainWindow::sizeValueChanged( int8_t ident, int value )
 {
    switch(ident){
       case 0: // Case where the spin box triggers the slider to change
          sizeSlider->setValue(value);
          break;
+
       case 1: // Case where the slider triggers the spin box to change
          sizeSpinBox->setValue(value);
          break;
+
       default:
          break;
    }
    wmSize = value;
    imgViewer->changeWMScale(wmSize);
-}
+} // end MainWindow::sizeValueChanged()

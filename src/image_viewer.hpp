@@ -38,33 +38,33 @@ public:
    /** 
     * @brief Constructor 
     */
-   ImageViewer(QWidget *parent = nullptr);
+   ImageViewer( QWidget *parent = nullptr );
 
    /** 
     * @brief Destructor 
     */
-   virtual ~ImageViewer() {}
+   virtual ~ImageViewer( void ) {}
 
    /**
     * @brief Initializes the main image
     */ 
-   void init(cv::String imgPath, cv::String wmPath);
+   void init( cv::String imgPath, cv::String wmPath );
 
    /**
     * @brief Initializes the wm image
     */ 
-   void loadWM(cv::String filename);
+   void loadWM( cv::String filename );
 
-   void changeWMScale(int scale);
+   void changeWMScale( int scale );
 
 protected:
-   void resizeEvent(QResizeEvent *event);
+   void resizeEvent( QResizeEvent *event );
 
 private:
    /** 
     * @brief Sets the QLabel's Pixmap from an OpenCV image
     */
-   void setPixmap();
+   void setPixmap( void );
 
    /** 
     * @brief  Helper function to resize an OpenCV Mat image
@@ -75,7 +75,7 @@ private:
     * 
     * @return the resized image
     */
-   cv::Mat resizeImage(const cv::Mat& img, int target_width = 500);
+   cv::Mat resizeImage( const cv::Mat& img, int target_width = 500 );
 
    /* A QLabel can be used to diplay an image */
    QLabel *image_lbl;
