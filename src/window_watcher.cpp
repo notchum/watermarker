@@ -37,7 +37,7 @@ WindowWatcher::WindowWatcher( uint8_t window_number, QSize size, QWidget *parent
          break;
          
       default:
-         LOG::FATAL("Invalid starting window!");
+         LOG_FATAL("Invalid starting window!\n");
          break;
    }  
 

@@ -164,7 +164,7 @@ void MainWindow::okayButtonPressed_slot()
 {
    static int i = 0;
    if(i < filenames.size()) {
-      LOG::DEBUG(("Advance to " + filenames[i]).c_str());
+      LOG_DEBUG("Advance to {}\n", filenames[i]);
       imgViewer->init(filenames[i], _wmPath.toStdString());
       i++;
    }
@@ -175,7 +175,7 @@ void MainWindow::okayButtonPressed_slot()
 
 void MainWindow::exitButtonPressed_slot( void )
 {
-   LOG::INFO("Done. Exiting...");
+   LOG_INFO("Done. Exiting...\n");
    this->close();
 } // end MainWindow::exitButtonPressed_slot()
 
@@ -183,15 +183,15 @@ void MainWindow::checkBox_slot( int state )
 {
    switch(state) {
       case 0:
-         LOG::INFO("Inverted watermark: OFF");
+         LOG_INFO("Inverted watermark: OFF\n");
          break;
 
       case 1: 
-         LOG::INFO("tristate 1");
+         LOG_INFO("tristate 1\n");
          break;
 
       case 2:
-         LOG::INFO("Inverted watermark: ON");
+         LOG_INFO("Inverted watermark: ON\n");
          break;
 
       default:

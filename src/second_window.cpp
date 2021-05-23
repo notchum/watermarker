@@ -61,12 +61,12 @@ void SecondWindow::selectPath_slot( void )
                                        QDir::homePath(),
                                        tr("Images (*.png *.jpeg *.jpg);; All files (*.*)"));
    if(QFileInfo::exists(path)) {
-      LOG::INFO(("Selected " + path.toStdString()).c_str());
+      LOG_INFO("Selected {}\n", path.toStdString());
       wmLineEdit->setText(path);
       okayButton->setEnabled(true);
    }
    else {
-      LOG::INFO("Path does not exist");
+      LOG_INFO("Path does not exist\n");
       okayButton->setDisabled(true);
    }
 } // end SecondWindow::selectPath_slot()
@@ -74,11 +74,11 @@ void SecondWindow::selectPath_slot( void )
 void SecondWindow::okayButtonPressed_slot( void )
 {
    emit okayButtonPressed();
-   LOG::DEBUG("SecondWindow okayButtonPressed emitted");
+   LOG_DEBUG("SecondWindow okayButtonPressed emitted\n");
 } // end SecondWindow::okayButtonPressed_slot()
 
 void SecondWindow::exitButtonPressed_slot( void )
 {
-   LOG::INFO("Done. Exiting...");
+   LOG_INFO("Done. Exiting...\n");
    this->close();
 } // end SecondWindow::exitButtonPressed_slot()

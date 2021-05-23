@@ -23,7 +23,7 @@ int main( int argc, char **argv )
    std::string file_path = __FILE__ ;
    std::string src_path = file_path.substr(0, file_path.rfind(PATH_DELIM)) ;
    std::string top_path = src_path.substr(0, src_path.rfind(PATH_DELIM)) ;
-   LOG::set_file_name( (top_path + PATH_DELIM + "watermarker.log").c_str() ) ;
+   set_log_file( (top_path + PATH_DELIM + "watermarker.log").c_str() ) ;
 
    // Create the Qt app 
    QApplication::setStyle("plastique");

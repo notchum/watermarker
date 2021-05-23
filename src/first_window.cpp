@@ -91,7 +91,7 @@ void FirstWindow::radioButton_slot( RadioButton index )
 
    switch(index) {
       case RadioButton::BATC_RADIO:
-         LOG::INFO("Batch option selected");
+         LOG_INFO("Batch option selected\n");
          currentOption = RadioButton::BATC_RADIO;
          if(isPathDir) {
                okayButton->setEnabled(true);
@@ -101,7 +101,7 @@ void FirstWindow::radioButton_slot( RadioButton index )
          }
          break;
       case RadioButton::IDNV_RADIO:
-         LOG::INFO("Individual option selected");
+         LOG_INFO("Individual option selected\n");
          currentOption = RadioButton::IDNV_RADIO;
          if(isPathFile) {
                okayButton->setEnabled(true);
@@ -129,12 +129,12 @@ void FirstWindow::selectPath_slot( void )
    }
 
    if(QFileInfo::exists(path)) {
-      LOG::INFO(("Selected " + path.toStdString()).c_str());
+      LOG_INFO("Selected {}\n", path.toStdString());
       pathLineEdit->setText(path);
       okayButton->setEnabled(true);
    }
    else {
-      LOG::INFO("Path does not exist");
+      LOG_INFO("Path does not exist\n");
       okayButton->setDisabled(true);
    }
 } // end FirstWindow::selectPath_slot()
@@ -142,11 +142,11 @@ void FirstWindow::selectPath_slot( void )
 void FirstWindow::okayButtonPressed_slot( void )
 {
    emit okayButtonPressed();
-   LOG::DEBUG("FirstWindow okayButtonPressed emitted");
+   LOG_DEBUG("FirstWindow okayButtonPressed emitted\n");
 } // end FirstWindow::okayButtonPressed_slot()
 
 void FirstWindow::exitButtonPressed_slot( void )
 {
-   LOG::INFO("Done. Exiting...");
+   LOG_INFO("Done. Exiting...\n");
    this->close();
 } // end FirstWindow::exitButtonPressed_slot()
