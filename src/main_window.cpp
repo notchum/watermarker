@@ -126,10 +126,6 @@ void MainWindow::init( QString path, QString wmPath, bool isPathDir )
    // First, set the paths
    this->setPaths(path, wmPath);
 
-   // Load watermarked image and then the invert of it
-   wmImg = cv::imread(_wmPath.toStdString());
-   wmImg_n = ~wmImg;
-
    if(isPathDir) { // Is it a directory
       // Use glob to store a vector of all filenames
       cv::glob(_mnPath.toStdString(), filenames);
@@ -184,6 +180,7 @@ void MainWindow::checkBox_slot( int state )
    switch(state) {
       case 0:
          LOG_INFO("Inverted watermark: OFF\n");
+         imgViewer->wmw->invertImage();
          break;
 
       case 1: 
@@ -192,6 +189,7 @@ void MainWindow::checkBox_slot( int state )
 
       case 2:
          LOG_INFO("Inverted watermark: ON\n");
+         imgViewer->wmw->invertImage();
          break;
 
       default:
@@ -213,12 +211,13 @@ void MainWindow::tranValueChanged( int8_t ident, int value )
       default:
          break;
    }
-   wmTran = value;
+   imgViewer->wmw->setTransparency(value);
 } // end MainWindow::tranValueChanged()
 
 void MainWindow::sizeValueChanged( int8_t ident, int value )
 {
-   switch(ident){
+   switch(ident)
+   {
       case 0: // Case where the spin box triggers the slider to change
          sizeSlider->setValue(value);
          break;
@@ -230,6 +229,5 @@ void MainWindow::sizeValueChanged( int8_t ident, int value )
       default:
          break;
    }
-   wmSize = value;
-   imgViewer->changeWMScale(wmSize);
+   imgViewer->wmw->setScale(value);
 } // end MainWindow::sizeValueChanged()

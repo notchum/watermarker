@@ -50,12 +50,8 @@ public:
     */ 
    void init( cv::String imgPath, cv::String wmPath );
 
-   /**
-    * @brief Initializes the wm image
-    */ 
-   void loadWM( cv::String filename );
-
-   void changeWMScale( int scale );
+   /* Watermark */
+   WatermarkWidget *wmw;
 
 protected:
    void resizeEvent( QResizeEvent *event );
@@ -76,6 +72,7 @@ private:
     * @return the resized image
     */
    cv::Mat resizeImage( const cv::Mat& img, int target_width = 500 );
+   cv::Mat drawBox( cv::Mat img );
 
    /* A QLabel can be used to diplay an image */
    QLabel *image_lbl;
@@ -84,8 +81,7 @@ private:
    cv::Mat image;
    cv::Rect roi;
 
-   /* Watermark */
-   WatermarkWidget *wmw;
+   
 
 }; // end class ImageViewer
 

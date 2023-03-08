@@ -11,6 +11,9 @@
 #ifndef WM_WIDGET_HPP
 #define WM_WIDGET_HPP
 
+#include "lib/logger/logger.hpp"
+#include "lib/utils/intersection.hpp"
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -50,6 +53,8 @@ public:
    void init( cv::String filename );
 
    void setScale( int scale );
+   void setTransparency( int alpha );
+   void invertImage( void );
 
    // enum class StartPosition
    // {
@@ -65,68 +70,31 @@ public:
    // };
 
 protected:
-   void mousePressEvent( QMouseEvent *event )
-   {
-      oldPos = event->globalPos();
-   } // end mousePressEvent()
-
-   void mouseMoveEvent( QMouseEvent *event )
-   {
-      const QPoint delta = event->globalPos() - oldPos;
-      move(x()+delta.x(), y()+delta.y());
-      oldPos = event->globalPos();
-
-      // if (this->underMouse()) {
-      // 	LOG::INFO("Under mouse");
-      // 	// No drag, just change the cursor and return
-      // 	if (event->x() <= 3 && event->y() <= 3) {
-      // 	startPos = start_positions::topleft;
-      // 	setCursor(Qt::SizeFDiagCursor);
-      // 	} else if (event->x() <= 3 && event->y() >= height() - 3) {
-      // 		startPos = start_positions::bottomleft;
-      // 		setCursor(Qt::SizeBDiagCursor);
-      // 	} else if (event->x() >= width() - 3 && event->y() <= 3) {
-      // 		startPos = start_positions::topright;
-      // 		setCursor(Qt::SizeBDiagCursor);
-      // 	} else if (event->x() >= width() - 3 && event->y() >= height() - 3) {
-      // 		startPos = start_positions::bottomright;
-      // 		setCursor(Qt::SizeFDiagCursor);
-      // 	} else if (event->x() <= 3) {
-      // 		startPos = start_positions::left;
-      // 		setCursor(Qt::SizeHorCursor);
-      // 	} else if (event->x() >= width() - 3) {
-      // 		startPos = start_positions::right;
-      // 		setCursor(Qt::SizeHorCursor);
-      // 	} else if (event->y() <= 3) {
-      // 		startPos = start_positions::top;
-      // 		setCursor(Qt::SizeVerCursor);
-      // 	} else if (event->y() >= height() - 3) {
-      // 		startPos = start_positions::bottom;
-      // 		setCursor(Qt::SizeVerCursor);
-      // 	} else {
-      // 		startPos = start_positions::move;
-      // 		setCursor(Qt::PointingHandCursor);
-      // 	}
-      // 	return;
-      // }
-   } // end mouseMoveEvent()
+   void resizeEvent( QResizeEvent *event );
+   void mousePressEvent( QMouseEvent *event );
+   void mouseMoveEvent( QMouseEvent *event );
 
 private:
    void setPixmap( void );
-   cv::Mat resize( void );
-   cv::Mat drawBox( cv::Mat img );
+   void resizeImage( void );
+   void drawImageBorder( void );
 
    /* A QLabel can be used to diplay an image */
-   QLabel *image_lbl;
+   QLabel *mImageLbl;
+
+   /* Source Image */
+   cv::Mat mSourceImage;
 
    /* Main Image */
-   cv::Mat image;
-   cv::Rect roi;
+   cv::Mat mImage;
+   cv::Rect mBorder;
 
    /* Other */
-   QPoint oldPos;
-   //StartPosition startPos;
-   int scale;
+   QPoint mOldPosition;
+   iPoint mTopLeftCoords;
+   iPoint mBottomRightCoords;
+   //StartPosition mStartPosition;
+   double mScale;
 
 }; // end class WatermarkWidget
 

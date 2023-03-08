@@ -41,29 +41,19 @@ void ImageViewer::init( cv::String imgPath, cv::String wmPath )
    wmw->init(wmPath);
 } // end ImageViewer::init()
 
-void ImageViewer::loadWM( cv::String filename )
-{
-   // Set the wm image matrix
-   //wmImg = cv::imread(filename);
-
-
-} // end ImageViewer::loadWM()
-
-void ImageViewer::changeWMScale( int scale )
-{
-   wmw->setScale(scale);
-}
 
 void ImageViewer::resizeEvent( QResizeEvent *event )
 {
    this->setPixmap();
    QWidget::resizeEvent(event);
-} // end ImageViewer::changeWMScale()
+} // end ImageViewer::resizeEvent()
 
 void ImageViewer::setPixmap( void )
 {
    // Resize the OpenCV image to fit the window but keep aspect ratio
-   cv::Mat img = this->resizeImage(image, this->width() - 30); // Resized to size of 
+   cv::Mat img = this->resizeImage(image, this->width() - 30);
+
+   img = this->drawBox(img);
 
    // Set the pixmap for the QLabel which displays the image recieved
    image_lbl->setPixmap(QPixmap::fromImage(QImage(img.data, img.cols, img.rows, img.step, QImage::Format_RGB888)));
@@ -102,3 +92,34 @@ cv::Mat ImageViewer::resizeImage( const cv::Mat& img, int target_width )
    // Return the newly resized image
    return out_img;
 } // end ImageViewer::resizeImage()
+
+cv::Mat ImageViewer::drawBox( cv::Mat img )
+{
+   cv::rectangle(img, this->roi, cv::Scalar(0, 255, 0), 1);
+   return img;
+} // end ImageViewer::drawBox()
+
+// void ImageViewer::blendImages( void )
+// {
+//    // load the input image, then add an extra dimension to the
+//    // image (i.e., the alpha transparency)
+//    image = cv2.imread(imagePath)
+//    (h, w) = image.shape[:2]
+//    image = np.dstack([image, np.ones((h, w), dtype="uint8") * 255])
+
+//    // construct an overlay that is the same size as the input
+//    // image, (using an extra dimension for the alpha transparency),
+//    // then add the watermark to the overlay in the bottom-right
+//    // corner
+//    overlay = np.zeros((h, w, 4), dtype="uint8")
+//    overlay[imgHeight - wmHeight - 10:imgHeight - 10, w - wW - 10:imgWidth - ] = watermark
+
+//    // blend the two images together using transparent overlays
+//    output = image.copy()
+//    cv2.addWeighted(overlay, args["alpha"], output, 1.0, 0, output)
+
+//    // write the output image to disk
+//    filename = imagePath[imagePath.rfind(os.path.sep) + 1:]
+//    p = os.path.sep.join((args["output"], filename))
+//    cv2.imwrite(p, output)
+// }
